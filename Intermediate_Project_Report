@@ -1,0 +1,97 @@
+# Project Title
+UNIVERSAL VISION-LANGUAGE DENSE RETRIEVAL: LEARNING A UNIFIED REPRESENTATION SPACE FOR MULTI-MODAL RETRIEVAL
+
+## Team Members
+Mingjun Wen
+Xuqi Zhu
+Dongjing Xie
+
+## Introduction and Problem Description
+
+The confluence of vision and language understanding has led to the emergence of multimodal models capable of tackling tasks that require simultaneous comprehension of visual and textual content. The paper, "Universal Vision-Language Dense Captioning," addresses the overarching challenge of unified multimodal retrieval, aiming to create a model capable of understanding and generating responses across different vision-language tasks.
+
+### Background
+
+Although current mainstream search engines primarily target textual data, the growth of multimedia content has been one of the most prominent trends on the internet. Various studies indicate that users prefer vivid multimodal content in their search results. Consequently, information retrieval for multimodal data has become increasingly crucial in the user search experience.
+
+### Problem Statement
+
+To facilitate the multimodal retrieval process, contemporary multimedia search systems typically adopt a 'divide and conquer' strategy. As illustrated in Figure 1(a), these methods first conduct searches within individual modalities, including text, images, videos, etc., and subsequently merge the retrieval results from different modalities. This is often accomplished by building an additional ranking module atop these single/cross-modality search engines to perform modality fusion. It is evident that the processes of relevance modeling and retrieval result fusion are typically intertwined to achieve more accurate multimodal search results. However, due to modality disparities, such models can only employ a piecemeal approach in pipeline modeling, making the fusion of retrieval results from distinct modalities challenging.
+
+![](https://huatu.98youxi.com/markdown/work/uploads/upload_3da98a49d7d454bc1d28179598d1ef83.png)
+   **Figure 1:** Different Architectures of Multi-Modal Retrieval Systems.
+
+
+In this paper, the authors introduce an end-to-end multimodal retrieval model that conducts unified retrieval on multimodal documents through user queries. As depicted in Figure 1(b), the universal multimodal retrieval maps both the query and the multimodal documents to a unified embedding space and retrieves multimodal candidates using nearest-neighbor search. Ultimately, this paper unifies the processes of relevance modeling, cross-modality matching, and retrieval result fusion in a single model as depicted in Figure 2.
+
+![](https://huatu.98youxi.com/markdown/work/uploads/upload_47eb1633e3380ebf23bfc6023305f1fb.png)
+   **Figure 2:** The Architecture of UniVL-DR.
+
+
+The goal is not just accuracy but also versatility – the model should be equally adept at various vision-language tasks without requiring task-specific modifications.
+
+## Description of the Data Used in the Project
+
+The research primarily utilizes the WebQA dataset to evaluate and fine-tune the proposed model:
+
+### WebQA Dataset:
+-**Links:** https://github.com/WebQnA/WebQA
+- **Despcriptions:** WEBQA is a new multi-hop, multi-modal question answering challenge for our community.Designed to simulate the heterogeneous information landscape one might expect during a web search, WEBQA covers a series of opendomain general visual queries while also forcing models to still reason about text. Our task requires a system to determine relevant sources, perform aggregation and reasoning.We also propose a novel general recipe for evaluation on WEBQA which measures both fluency and accuracy.
+- In total, WEBQA has over 34K training QA pairs, with an additional 5K and 7.5K held out for development and testing.Overall Statistics are summarized in Table 1 and language distributions are presented in Table 2 as below:
+
+
+
+    | Modality | Train  | Dev   | Test  |
+    |----------|-------|-------|-------|
+    | Image    | 18,954| 2,511 | 3,464 |
+    | Text     | 17,812| 2,455 | 4,076 |
+
+   **Table 1:** Number of samples collected for each modality fold.
+
+
+    |  | Question | Answer | Correct | Distract | Correct | Distract |
+    |----------|----------|--------|---------|----------|---------|----------|
+    | Image    | 16.4± 6  | 14.4± 6| 13.3±11 | 12.6±11  | —      | 36.4±10  |
+    | Text     | 18.6± 8  | 10.7±10| —       | 14.1±13  | 45.3±12| 38.3±10  |
+
+    **Table 2.** Length distribution for different textual components.
+
+
+## What Have Been Done So Far
+
+1. **Environment Setup:**
+  
+- Python==3.7
+- Pytorch
+- transformers
+- clip
+- faiss-cpu==1.7.0
+- tqdm
+- numpy
+- base64
+- Install the`pytrec_eval`from`https://github.com/cvangysel/pytrec_eval`
+
+
+2. **Code Acquisition and Review:**
+  
+  - **Source:** https://github.com/OpenMatch/UniVL-DR
+  - **Components Reviewed:** The model's architecture,  evaluation metrics.
+  
+  
+3. **Pipeline Execution:**
+  
+  - **Dataset Preprocessed:** Preprocess of dataset WebQA.
+  - **Train UniVL-DR:** UniVL-DR inherits CLIP (ViT-B/32). The texts must be truncated by 77 tokens and you can try different vision-language models. As shown in our experiments, we suggest to use the dual encoder models.There are two steps to train UniVL-DRR:
+- 
+  - **First step:** Go to the`CLIP-DPR`folder and train models using inbatch negatives.
+  - **Second step:** Then using`CLIP-DPR`to generate hard negatives fro training UniVL-DR.
+  - **Final step:** Go to the`UniVL-DR`folder and train models using hard negatives.
+- **Evaluate Retrieval Effectiveness** Go to the`CLIP-DPR`or`UniVL-DR`folder and evaluate model performance.
+
+## What Remains to be Done
+
+1. **Performance Benchmarking:** A systematic comparison with state-of-the-art dense captioning models to evaluate the proposed model's strengths and weaknesses.
+  
+2. **Data Augmentation with Videos:** Videos encapsulate dynamic scenes and temporal information. Incorporating video data can enhance the model's understanding of moving objects and changing contexts. The goal is to extend the current framework to handle video sequences and generate dense captions accordingly.
+  
+3. **Model Interpretability:** Investigate the internal workings of the model to understand how it makes decisions and generates captions. This can be crucial for refining the model and ensuring its reliability.
