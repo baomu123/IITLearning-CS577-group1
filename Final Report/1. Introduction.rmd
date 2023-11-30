@@ -1,1 +1,26 @@
+# Project Title
+UNIVERSAL VISION-LANGUAGE DENSE RETRIEVAL: LEARNING A UNIFIED REPRESENTATION SPACE FOR MULTI-MODAL RETRIEVAL（ICLR,2023）
+
+
+## Team Members
+Mingjun Wen
+Xuqi Zhu
+Dongjing Xie
+
+## Introduction and Problem Description
+
+The confluence of vision and language understanding has led to the emergence of multimodal models capable of tackling tasks that require simultaneous comprehension of visual and textual content. The paper, "Universal Vision-Language Dense Captioning," addresses the overarching challenge of unified multimodal retrieval, aiming to create a model capable of understanding and generating responses across different vision-language tasks.
+
+### Background
+
+Although current mainstream search engines primarily target textual data, the growth of multimedia content has been one of the most prominent trends on the internet. Various studies indicate that users prefer vivid multimodal content in their search results. Consequently, information retrieval for multimodal data has become increasingly crucial in the user search experience.
+
+### Problem Statement
+
+To facilitate the multimodal retrieval process, contemporary multimedia search systems typically adopt a 'divide and conquer' strategy. As illustrated in Figure 1(a), these methods first conduct searches within individual modalities, including text, images, videos, etc., and subsequently merge the retrieval results from different modalities. This is often accomplished by building an additional ranking module atop these single/cross-modality search engines to perform modality fusion. It is evident that the processes of relevance modeling and retrieval result fusion are typically intertwined to achieve more accurate multimodal search results. However, due to modality disparities, such models can only employ a piecemeal approach in pipeline modeling, making the fusion of retrieval results from distinct modalities challenging.
+
+![](https://huatu.98youxi.com/markdown/work/uploads/upload_3da98a49d7d454bc1d28179598d1ef83.png)
+   **Figure 1:** Different Architectures of Multi-Modal Retrieval Systems.
+
+
 
