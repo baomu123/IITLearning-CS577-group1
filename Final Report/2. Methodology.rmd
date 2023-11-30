@@ -1,1 +1,12 @@
+## Methodology of UniVL-DR
 
+In this paper, the authors introduce an end-to-end multimodal retrieval model that conducts unified retrieval on multimodal documents through user queries. As depicted in Figure 1(b), the universal multimodal retrieval maps both the query and the multimodal documents to a unified embedding space and retrieves multimodal candidates using nearest-neighbor search. Ultimately, this paper unifies the processes of relevance modeling, cross-modality matching, and retrieval result fusion in a single model as depicted in Figure 2.
+
+![](https://huatu.98youxi.com/markdown/work/uploads/upload_47eb1633e3380ebf23bfc6023305f1fb.png)
+   **Figure 2:** The Architecture of UniVL-DR.
+
+The goal is not just accuracy but also versatility – the model should be equally adept at various vision-language tasks without requiring task-specific modifications.
+
+### 增加数学原理描述（朱）
+
+### 增加处理步骤描述（朱）
