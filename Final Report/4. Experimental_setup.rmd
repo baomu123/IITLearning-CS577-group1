@@ -9,3 +9,18 @@
 - numpy
 - base64
 - Install the`pytrec_eval`from`https://github.com/cvangysel/pytrec_eval`
+
+### Code Acquisition and Review:
+  
+  - **Source:** https://github.com/OpenMatch/UniVL-DR
+  - **Components Reviewed:** The model's architecture,  evaluation metrics.
+  
+  
+### Pipeline Execution:
+  
+  - **Dataset Preprocessed:** Preprocess of dataset WebQA.
+  - **Train UniVL-DR:** UniVL-DR inherits CLIP (ViT-B/32). The texts must be truncated by 77 tokens and you can try different vision-language models. As shown in our experiments, we suggest to use the dual encoder models.There are two steps to train UniVL-DRR:
+- 
+  - **First step:** Go to the`CLIP-DPR`folder and train models using inbatch negatives.
+  - **Second step:** Then using`CLIP-DPR`to generate hard negatives fro training UniVL-DR.
+  - **Final step:** Go to the`UniVL-DR`folder and train models using hard negatives.
