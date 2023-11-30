@@ -1,1 +1,25 @@
+## Description of the Data Used in the Project
 
+The research primarily utilizes the WebQA dataset to evaluate and fine-tune the proposed model:
+
+### WebQA Dataset:
+-**Links:** https://github.com/WebQnA/WebQA
+- **Despcriptions:** WEBQA is a new multi-hop, multi-modal question answering challenge for our community.Designed to simulate the heterogeneous information landscape one might expect during a web search, WEBQA covers a series of opendomain general visual queries while also forcing models to still reason about text. Our task requires a system to determine relevant sources, perform aggregation and reasoning.We also propose a novel general recipe for evaluation on WEBQA which measures both fluency and accuracy.
+- In total, WEBQA has over 34K training QA pairs, with an additional 5K and 7.5K held out for development and testing.Overall Statistics are summarized in Table 1 and language distributions are presented in Table 2 as below:
+
+
+
+    | Modality | Train  | Dev   | Test  |
+    |----------|-------|-------|-------|
+    | Image    | 18,954| 2,511 | 3,464 |
+    | Text     | 17,812| 2,455 | 4,076 |
+
+   **Table 1:** Number of samples collected for each modality fold.
+
+
+    |  | Question | Answer | Correct | Distract | Correct | Distract |
+    |----------|----------|--------|---------|----------|---------|----------|
+    | Image    | 16.4± 6  | 14.4± 6| 13.3±11 | 12.6±11  | —      | 36.4±10  |
+    | Text     | 18.6± 8  | 10.7±10| —       | 14.1±13  | 45.3±12| 38.3±10  |
+
+    **Table 2.** Length distribution for different textual components.
