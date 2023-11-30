@@ -1,1 +1,11 @@
-
+## Environment Setup:
+  
+- Python==3.7
+- Pytorch
+- transformers
+- clip
+- faiss-cpu==1.7.0
+- tqdm
+- numpy
+- base64
+- Install the`pytrec_eval`from`https://github.com/cvangysel/pytrec_eval`
