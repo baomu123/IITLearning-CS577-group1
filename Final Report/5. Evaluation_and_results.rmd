@@ -1,1 +1,37 @@
+# EVALUATION RESULTS
+
+##  Multi-Modal Retrieval Performance
+
+```
+The UniVL-DR outperforms all baselines with more than `7%` improvement on ranking evaluation, recalls more than `6%` relevant multi-modality documents, and even outperforms the divide-and-conquer model guided by oracle modality routing.
+```
+
+![](table1.png)
+
+##  Retrieval Performance of Different Ablation Models
+
+```
+UniVL-DR also shows its advantages by outperforming all baseline models on both text-text and text-image retrieval tasks, demonstrating that multi-modality modeling indeed benefits single/cross modality retrieval.
+```
+
+![](table2.png)
+
+## Effectiveness of Different Hard Negative Training Strategies
+
+```
+As we see, The advantage of UniVL-DR is to build a more uniform and effective multi-modal search model through modal balanced hard negative sampling, but the disadvantage is that it may require more computing resources and training time.
+```
+
+![](table3.png)
+
+## BRIDGING CROSS-MODALITY MATCHING WITH IMAGE VERBALIZATION
+
+```
+UniVL-DR successfully bridges the modal gap between text and images through image literalization methods and achieves better results in text-image and multi-modal retrieval tasks.
+```
+
+![](table4.png)
+
+### Therefore, UniVL-DR demonstrates significant advantages in various aspects, highlighting its critical importance in addressing multi-modal retrieval tasks.
+
 
