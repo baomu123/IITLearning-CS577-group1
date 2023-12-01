@@ -7,6 +7,47 @@ In this paper, the authors introduce an end-to-end multimodal retrieval model th
 
 The goal is not just accuracy but also versatility – the model should be equally adept at various vision-language tasks without requiring task-specific modifications.
 
-### 增加数学原理描述（朱）
+### TextEnocder and ImgEncoder
+UniVL-DR gets representations of queries, image documents, and text documents with two encoders:TextEnocder and ImgEncoder. Specifically, the image document $d^{\text{Image}}_j$ consists of a picture $I_j$ and an image caption $C_j$, thus we utilize ImgEncoder and TextEnocder to encode $I_j$ and $C_j$.
 
-### 增加处理步骤描述（朱）
+**Query Encoding**. UniVL-DR directly encodes the query $q$ to get its representation $\vec{q}$:
+\begin{equation}
+\vec{q} = \text{TextEnocder}(q).
+\end{equation}
+
+**Text Document Encoding**. To represent text documents, UniVL-DR also leverages the TextEnocder to encode the $i$-th text document $d^{\text{Text}}_i$ as $\vec{d}^{\text{Text}}_i$:
+\begin{equation}
+\vec{d}^{\text{Text}}_i = \text{TextEnocder}(d^{\text{Text}}_i).
+\end{equation}
+
+**Image Document Encoding**.Different from text documents, image documents can be represented by picture features and image captions, and the textual captions can help better understand the semantics of image documents (Baldrati et al., 2022). Thus, UniVL-DR encodes picture $I_j$ and image caption $C_j$ and then sums these embeddings to get the representation $\vec{d}^{\text{Image}}_j$ of the $j$-th image document:
+\begin{equation}
+\vec{d}^{\text{Image}}_j = \text{ImgEnocder}(I_j) + \text{TextEnocder}(C_j).
+\end{equation}
+
+The representations $\vec{d}^{\text{Image}}_j$ and $\vec{d}^{\text{Text}}_i$ of image document and text document use the same TextEnocder to encode their textual information, which bridges different modalities in the text space and helps to build a universal embedding space for multi-modality retrieval.
+
+**Multi-modality Document Retrieval.** The cosine similarity score $f(q, d)$ of query $q$ and document candidate $d \in D$ can be calculated to estimate the relevance between $q$ and $d$:
+\begin{equation}
+f(q, d) = \cos(\vec{q}, \vec{d}),
+\end{equation}
+where $\vec{q}$ and $\vec{d}$ are the representations of $q$ and $d$. The efficient similarity calculation between queries and the multi-modality documents can be provided by FAISS (Johnson et al., 2019).
+
+### Universal Represtation Learning
+UniVL-DR utilizes the CLIP vision-language model (developed by Radford and colleagues in 2021) to acquire universal representations that are effective for queries and documents across multiple modalities, particularly excelling in cross-modality retrieval. To enhance the universality of the embedding space, UniVL-DR strategically employs hard negatives that are balanced across different modalities during its training process. This approach is specifically designed to prevent the model from becoming overly biased towards single-modality signals when undergoing multi-modal co-training.
+
+Given the query $q$ and its relevant candidate $d^{+} \in D$, the embedding space can be optimized by sampling hard negatives $D^{-}$ and minimizing the following contrastive training loss $L$:
+\begin{equation}
+\begin{aligned}
+L = & - \log \frac{e^{f(q,d^{+})/\tau}}{e^{f(q,d^{+})/\tau} + \sum_{d^{-} \in D^{-}} e^{f(q,d^{-})/\tau}} \\
+= & - \frac{f(q, d^{+})}{\tau} + \log \left( e^{f(q,d^{+})/\tau} + \sum_{i=1}^{k_1} e^{f(q,d_{i}^{-\text{Image}})/\tau} + \sum_{j=1}^{k_2} e^{f(q,d_{j}^{-\text{Text}})/\tau} \right),
+\end{aligned}
+\end{equation}
+
+we noted 
+\begin{equation}L_{\text{Align}}=\frac{f(q, d^{+})}{\tau} \end{equation}  
+\begin{equation}L_{\text{Image}}= \sum_{i=1}^{k_1} e^{f(q,d_{i}^{-\text{Image}})/\tau}  \end{equation}
+\begin{equation}L_{\text{Text}}= \sum_{j=1}^{k_2} e^{f(q,d_{j}^{-\text{Text}})/\tau}  \end{equation}
+
+where $\tau$ is the temperature to scale the similarity score. During training, we in fact maximize $L_{\text{Align}}$ and minimize $L_{\text{Image}}$ and $L_{\text{Text}}$, which make queries closer to related documents and away from unrelated documents. Our modality-balanced negative training strategy keeps $k_1 = k_2 = k$ to better train the modality selection ability of retrievers.
+
