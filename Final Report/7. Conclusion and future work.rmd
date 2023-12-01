@@ -1,4 +1,4 @@
-#### Conclusions
+#### 7. Conclusions
 
 In conclusion, our project, focused on Universal Vision-Language Dense Retrieval (UniVL-DR) for multi-modal retrieval, has made significant strides in bridging the gap between diverse media types. The key contributions and findings include:
 
