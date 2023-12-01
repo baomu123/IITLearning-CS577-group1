@@ -1,1 +1,29 @@
+#### Conclusions
+
+In conclusion, our project, focused on Universal Vision-Language Dense Retrieval (UniVL-DR) for multi-modal retrieval, has made significant strides in bridging the gap between diverse media types. The key contributions and findings include:
+
+- **Unified Representation Space**: UniVL-DR successfully learned a unified representation space for multi-modal documents, breaking the modality boundary and achieving state-of-the-art performance in retrieval tasks.
+- **Modality-Balanced Training**: The implementation of a modality-balanced hard negative training strategy proved effective in addressing the challenge of fusing retrieval results from different modalities, leading to enhanced performance.
+- **Image Verbalization**: The innovative image verbalization method added a new dimension to multi-modal understanding by converting image features into natural language, thereby improving the textual representations of images.
+
+#### Lessons Learned
+
+Through the course of this project, several valuable lessons were learned:
+
+- **Importance of Modality Balance**: Achieving a balance between different modalities during training is crucial for the success of multi-modal retrieval models. Our modality-balanced training approach significantly contributed to the model's effectiveness.
+- **Versatility of Universal Representations**: UniVL-DR demonstrated that learning one universal representation space can extend benefits beyond multi-modal tasks, providing gains in single-modality tasks as well.
+
+
+
+#### Future Work
+
+While our project has made notable progress, there are several avenues for future exploration:
+
+- **Exploration of Additional Modalities**: Extend the model to handle a broader range of modalities, such as audio and video, to create an even more versatile multi-modal retrieval system.
+- **Fine-Tuning for Specific Domains**: Investigate the adaptability of UniVL-DR in specific domains by fine-tuning the model on domain-specific datasets, exploring its potential in specialized applications.
+- **Enhanced Image Verbalization**: Further research can be conducted to refine and improve the image verbalization method, exploring novel techniques for better aligning semantics in image captions and pixel features.
+- **Interactive Retrieval Interfaces**: Develop interactive interfaces that leverage the universal representations learned by UniVL-DR, providing users with more intuitive and efficient ways to retrieve information across diverse media types.
+
+In summary, our project not only advances the field of multi-modal retrieval but also opens up promising directions for future research and application development. The lessons learned and insights gained lay a foundation for continued exploration in this dynamic and evolving domain.
+
 
